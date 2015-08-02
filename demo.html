@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.box{
+		width: 1000px;
+		margin: 0 auto;
+	}
+	#btn{
+		width: 50px;
+		height: 110px;
+		position: fixed;
+		right: 100px;
+		bottom: 30px;
+		background: url(top1.png) no-repeat ;
+		display: none;
+	}
+	#btn:hover{
+		background: url(top2.png) no-repeat;
+	}
+</style>
+<body>
+	<div class="box">
+		<img src="1.jpg" alt="">
+		<img src="1.jpg" alt="">
+		<img src="1.jpg" alt="">
+		<img src="1.jpg" alt="">
+		<img src="1.jpg" alt="">
+		<img src="1.jpg" alt="">
+		<img src="1.jpg" alt="">
+		<img src="1.jpg" alt="">
+		<img src="1.jpg" alt="">
+		<a href="javascript:;" id="btn" title="回到顶端"></a>
+	</div>
+	
+
+<script>
+	window.onload = function(){
+		var topbtn = document.getElementById('btn');
+		var viewHeight = document.documentElement.clientHeight;	  //获取视口的高度
+		var bodyHeight = document.body.clientHeight		//获取整个页面的高度
+		var timer = null;
+
+		// alert(bodyHeight);
+		window.onscroll = function(){	//添加窗口滚动事件
+			var scrollHeight = document.body.scrollTop; //获取滚动的高
+
+			if(scrollHeight > 1.5*viewHeight ){
+				topbtn.style.display = "block";
+			}else{
+				topbtn.style.display = "none";
+			}
+		}
+
+		topbtn.onclick = function(){
+			timer = setInterval(function(){
+				var scrollHeight = document.body.scrollTop;	//获取以滚动的总高度
+				var speedTop = scrollHeight / 20;		//会顶端每次减少量
+
+				// alert(scrollHeight);
+
+				document.body.scrollTop = scrollHeight -speedTop;
+
+				if(scrollHeight == 0){
+					clearInterval(timer);
+				}
+			}, 10);			
+		}
+
+
+	}
+</script>
+</body>
+</html>
